@@ -40,13 +40,16 @@ var newWord;
 
 // Function to tell computer to randomly select a word and store it.
 // Also, create initial array of the word and store updatedWord as blanks
-// to be shown in html.
+// to be shown in html. Set all initial conditions. Clear out letters
+// guessed. Set # remaining guesses to 8.
 
 function selectWord() {
 	randomCountry = countries[Math.floor(Math.random()*countries.length)];
 	updateWord.length = randomCountry.length;
 	updateWord.fill("_");
 	document.querySelector("#word").innerHTML = updateWord.join(' ');
+	guessesRemaining = 8;
+	lettersGuessed = [""];
 }
 
 // Function to check and update updateWord array 
@@ -54,15 +57,17 @@ function checkEntry() {
 
 	// Then check if letter has already been guessed
 	for (var i = 0; i < lettersGuessed.length; i++) {
-		if (guessedLetter == lettersGuessed[i]) {
-			alert ("You have already guessed this letter");
-			// record true if letter has been guessed
+		if ((guessedLetter == lettersGuessed[i]) && (repeat !==true)) {
+			// record false in the array if letter has been guessed
 			var repeat = true;
-		} else {
-			// record flase if letter has not been guessed
-			var repeat = false;
-			}
+		} 
 	}
+	console.log("true/false" + repeat);
+	// If the guessed letter has been guessed already then create alert
+	if (repeat === true) {
+		alert ("You have already guessed this letter");
+	}
+
 	// For loop to cycle through all letters in the word
 	for(var i = 0; i < updateWord.length; i++) {
 		// check if letter exists in word,
@@ -78,7 +83,7 @@ function checkEntry() {
 	}
 	// Add missed letter guesses and change number of tries remaining
 	// if guessed letter is missing from entire word.
-	if ((miss == updateWord.length) && (repeat === false))  {
+	if ((miss == updateWord.length) && (repeat !== true))  {
 	lettersGuessed.push(guessedLetter);
 	guessesRemaining = guessesRemaining - 1;
 	}
@@ -101,6 +106,11 @@ function checkGameOver() {
 		wins = wins + 1;
 		document.querySelector("#noOfWins").innerHTML = wins;
 		newWord = true;
+	}
+	// Check if number of tries is 0. End game if it is.
+	if (guessesRemaining == 0) {
+		newWord = true;
+		alert("Sorry! Try again!");
 	}
 }
 
@@ -128,6 +138,15 @@ if (updateWord = [""]) {
 	selectWord();
 }
 
+//Testing. See what the variables are initially
+console.log("selected country: " + randomCountry);
+console.log("user guess: " + guessedLetter);
+console.log("check updated word to be shown in html: " + updateWord.join(' '));
+console.log("number of wins: " + wins);
+console.log("letters guessed so far: " + lettersGuessed.join(''));
+console.log("number of guesses remaing: " + guessesRemaining);
+
+
 // Game starts whenever a letter is pressed on the keyboard
 
 document.onkeypress = function(event) {
@@ -140,6 +159,8 @@ document.onkeypress = function(event) {
 	else {
 	// Determine which key was pressed
 	guessedLetter = event.key;
+	// Convert it to lower case because array letters are in lower case
+	guessedLetter = guessedLetter.toLowerCase();
 	// check letter entry
 	checkEntry();
 	// See if all letters have been guessed
@@ -149,6 +170,7 @@ document.onkeypress = function(event) {
 	// Check if it's necessary to make new word
 	if (newWord === true) {
 		selectWord();
+		writeHtml();
 	}
 	else {
 		// Write results to html
@@ -156,17 +178,20 @@ document.onkeypress = function(event) {
 	}
 	// clear newWord
 	newWord = "";
+
+	//Testing. See how variables change with each key stroke
+	//-------------------------------------------------------------------
+	console.log("selected country: " + randomCountry);
+	console.log("user guess: " + guessedLetter);
+	console.log("check updated word to be shown in html: " + updateWord.join(' '));
+	console.log("number of wins: " + wins);
+	console.log("letters guessed so far: " + lettersGuessed.join(''));
+	console.log("number of guesses remaing: " + guessesRemaining);
+
 }
 
 
-//Testing
-console.log( "index 10 countries: " + countries[10]);
-console.log("selected country: " + randomCountry);
-console.log("user guess: " + guessedLetter);
-console.log("check updated word to be shown in html: " + updateWord.join(' '));
-console.log("number of wins: " + wins);
-console.log("letters guessed so far: " + lettersGuessed.join(''));
-console.log("number of guesses remaing: " + guessesRemaining);
+
 
 
 
