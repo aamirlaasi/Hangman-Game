@@ -1,0 +1,31 @@
+/* CSS stylings are shown in this file */
+
+body {
+	background-image: url("worldmap.jpg");
+}
+
+.size {
+	width: 40%;
+	font-size: 24px;
+}
+
+.wins {
+	font-size: 30px;
+	color: #13ce13;
+}
+
+.remain {
+	font-size: 30px;
+	color: #ff0000;
+}
+
+.guesses {
+	font-size: 30px;
+	color: #001eff;
+}
+
+.selected {
+	font-size: 30px;
+	color: #f27b18;
+}
+

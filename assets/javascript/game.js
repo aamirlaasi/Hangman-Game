@@ -28,6 +28,9 @@ var wins = 0;
 // This array holds the letters already guessed
 var lettersGuessed = [""];
 
+// Create array to hold Upper Case of letters guessed
+var lettersGuessedCap = [""];
+
 // This variable counts the number of guesses remaing. The player is
 // allotted 8 guesses to complete a word.
 var guessesRemaining = 8;
@@ -50,6 +53,7 @@ function selectWord() {
 	document.querySelector("#word").innerHTML = updateWord.join(' ');
 	guessesRemaining = 8;
 	lettersGuessed = [""];
+	lettersGuessedCap = [""];
 }
 
 // Function to check and update updateWord array 
@@ -63,10 +67,13 @@ function checkEntry() {
 		} 
 	}
 	console.log("true/false" + repeat);
-	// If the guessed letter has been guessed already then create alert
-	if (repeat === true) {
-		alert ("You have already guessed this letter");
-	}
+	// The section below was used for testing.
+	// If the guessed letter has been guessed already then create alert.
+	// -------------------------------------------------
+	//if (repeat === true) {
+	//	alert ("You have already guessed this letter");
+	//}
+	// --------------------------------------------------
 
 	// For loop to cycle through all letters in the word
 	for(var i = 0; i < updateWord.length; i++) {
@@ -81,7 +88,7 @@ function checkEntry() {
 			miss = miss + 1;
 		}
 	}
-	// Add missed letter guesses and change number of tries remaining
+	// Add missed letter guesses and reduce number of tries remaining by 1
 	// if guessed letter is missing from entire word.
 	if ((miss == updateWord.length) && (repeat !== true))  {
 	lettersGuessed.push(guessedLetter);
@@ -110,7 +117,10 @@ function checkGameOver() {
 	// Check if number of tries is 0. End game if it is.
 	if (guessesRemaining == 0) {
 		newWord = true;
-		alert("Sorry! Try again!");
+		// Test game over
+		// ---------------------------
+		//alert("Sorry! Try again!");
+		// ---------------------------
 	}
 }
 
@@ -120,8 +130,12 @@ function writeHtml() {
 	document.querySelector("#word").innerHTML = updateWord.join(' ');
 	// Update number of guesses remaining
 	document.querySelector("#remaining").innerHTML = guessesRemaining;
-	// Update the letters guessed 
-	document.querySelector("#guessed").innerHTML = lettersGuessed.join('');
+	// Update the letters guessed after creating upper case letter array
+	// var lettersGuessedCap = lettersGuessed;
+	for (i=0; i < lettersGuessed.length; i++) {
+		lettersGuessedCap[i] = lettersGuessed[i].toUpperCase();
+	}
+	document.querySelector("#guessed").innerHTML = lettersGuessedCap.join(' ');
 }
 
 // Test for functions used during initial development
@@ -153,10 +167,15 @@ document.onkeypress = function(event) {
 
 	// Get the character code of the key pressed and check it
 	var charStr = String.fromCharCode(event.keyCode).toLowerCase();
-	if (!/[a-z]/.test(charStr)) {
-		alert ("Please select a letter");
-	} 
-	else {
+	// The section below was used for testing. Alert if a key other
+	// than a letter is pressed.
+	//------------------------------------
+	//if (!/[a-z]/.test(charStr)) {
+	//	alert ("Please select a letter");
+	//} 
+	//-------------------------------------
+	// Only run the code below if a letter is typed
+	if (/[a-z]/.test(charStr)) {
 	// Determine which key was pressed
 	guessedLetter = event.key;
 	// Convert it to lower case because array letters are in lower case

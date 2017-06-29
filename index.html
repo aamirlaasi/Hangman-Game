@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hangman Game</title>
-	<!-- Latest compiled and minified CSS -->
+	<!-- Latest compiled and minified CSS for bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Local CSS goes here -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
 	<div class="jumbotron">
@@ -12,31 +15,37 @@
 			<p>All around the World</p>
 		</div>
 	</div>
-	<div class="panel panel-default">
+	<div class="panel panel-default size center-block">
 		<div class="panel-body text-center">
-			<p>Selected word</p>
-			<p id = "word"> </p>
+			<strong>Selected word</strong>
+			<p class="selected" id = "word"> </p>
 		</div>
 	</div>
-	<div class="panel panel-default">
+	<div class="panel panel-default size center-block">
 		<div class="panel-body text-center">
-			<p>Number of wins</p>
-			<p id="noOfWins"></p>
+			<strong>Number of wins</strong>
+			<p class="wins" id="noOfWins"></p>
 		</div>
 	</div>
-	<div class="panel panel-default">
+	<div class="panel panel-default size center-block">
 		<div class="panel-body text-center">
-			<p>Number of guesses remaining</p>
-			<p id="remaining">8</p>
+			<strong>Number of guesses remaining</strong>
+			<p class="remain" id="remaining">8</p>
 		</div>
 	</div>
-	<div class="panel panel-default">
+	<div class="panel panel-default size center-block">
 		<div class="panel-body text-center">
-			<p >Letters already guessed</p>
-			<p id="guessed"> </p>
+			<strong >Letters already guessed</strong>
+			<p class="guesses" id="guessed"> </p>
 		</div>
 	</div>
 </body>
-
+<!-- jquery link for bootstrap -->
+  		<script src="https://code.jquery.com/jquery-1.12.4.js"
+  		integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+  		crossorigin="anonymous"></script>
+<!-- Latest compiled and minified JavaScript for bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Javascript for Hangman Game -->
 <script type="text/javascript" src="assets/javascript/game.js"></script>
 </html>
